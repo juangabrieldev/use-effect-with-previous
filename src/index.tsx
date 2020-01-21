@@ -1,8 +1,6 @@
 import { DependencyList, useEffect, useRef } from 'react';
 
-type Callback<T> = (previousValues: T) => void;
-
-function useEffectWithPrevious(callback: Callback<DependencyList>, dependencies: DependencyList) {
+function useEffectWithPrevious(callback: (previousValues: DependencyList) => void, dependencies: DependencyList) {
   const refs = useRef(Array(dependencies.length).fill(null))
 
   useEffect(
