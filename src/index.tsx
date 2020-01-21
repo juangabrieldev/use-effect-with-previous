@@ -9,8 +9,8 @@ function useEffectWithPrevious(callback: Callback<DependencyList>, dependencies:
     () => {
       callback(
         dependencies.length === 1 ?
-        dependencies[0] :
-        dependencies
+        refs.current[0] :
+        refs.current
       );
 
       dependencies.forEach((dependency, i) => {
