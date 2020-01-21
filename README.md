@@ -2,7 +2,7 @@
 
 > A layer over useEffect that provides previous values of dependencies.
 
-[![NPM](https://img.shields.io/npm/v/use-effect-with-previous.svg)](https://www.npmjs.com/package/use-effect-with-previous) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
+[![NPM](https://img.shields.io/npm/v/use-effect-with-previous.svg)](https://www.npmjs.com/package/use-effect-with-previous)
 
 ## Install
 
@@ -12,18 +12,27 @@ npm install --save use-effect-with-previous
 
 ## Usage
 
-```tsx
-import * as React from 'react'
-
-import { useMyHook } from 'use-effect-with-previous'
+```js
+import React, { useState } from 'react'
+import useEffectWithPrevious from 'use-effect-with-previous'
 
 const Example = () => {
-  const example = useMyHook()
-  return (
-    <div>
-      {example}
-    </div>
-  )
+  const [ state, setState ] = useState(1);
+  const [ anotherState, setAnotherState ] = useState(2);
+
+  useEffectWithPrevious(
+    previousState => {
+      // Compare previous and current state.
+    },
+    state
+  );
+
+  useEffectWithPrevious(
+    ([previousState, previousAnotherState]) => {
+      // Dependencies can be array of state.
+    },
+    [state, anotherState]
+  );
 }
 ```
 
