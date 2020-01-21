@@ -22,14 +22,14 @@ const Example = () => {
 
   useEffectWithPrevious(
     previousState => {
-      // Compare previous and current state.
+    // Omit array destructuring if there's only one dependency.
     },
-    state
+    [state]
   );
 
   useEffectWithPrevious(
-    ([previousState, previousAnotherState]) => {
-      // Dependencies can be array of state.
+    ([ previousState, previousAnotherState ]) => {
+      // Compare previous and current state.
     },
     [state, anotherState]
   );
