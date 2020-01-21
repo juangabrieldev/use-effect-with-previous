@@ -1,23 +1,28 @@
-import * as React from 'react';
+import { useEffect, useMemo, useRef } from 'react';
 
-export const useMyHook = () => {
-  let [{
-    counter
-  }, setState] = React.useState<{
-    counter: number;
-  }>({
-    counter: 0
+type Callback<T> = (previousValues: T) => void;
+
+// @ts-ignore
+function useEffectWithPrevious<T, S>(callback: Callback<S>, dependencies: S) {
+  const isArray = useMemo(() => Array.isArray(dependencies), []);
+
+  const refs = useRef((
+    () => (
+      isArray ?
+      Array((dependencies as unknown as []).length).fill(null) :
+      null
+    )
+  )());
+
+  useEffect(() => {
+    if(isArray) {
+      (dependencies as unknown as []).forEach((dependency, i) => {
+        (refs.current as [])[i] = dependency;
+      })
+    } else {
+      (refs.current as unknown as S) = dependencies;
+    }
   });
 
-  React.useEffect(() => {
-    let interval = window.setInterval(() => {
-      counter++;
-      setState({counter})
-    }, 1000)
-    return () => {
-      window.clearInterval(interval);
-    };
-  }, []);
-
-  return counter;
-};
+  return callback(dependencies);
+}
