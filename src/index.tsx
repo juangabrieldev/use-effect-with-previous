@@ -1,24 +1,22 @@
-import { DependencyList, useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 
-function useEffectWithPrevious(callback: (previousValues: DependencyList) => void, dependencies: DependencyList) {
+type Callback<T> = (previousValues: T) => void;
+
+function useEffectWithPrevious<T extends readonly any[]>(callback: Callback<T>, dependencies: T) {
   const refs = useRef(Array(dependencies.length).fill(null))
 
   useEffect(
     () => {
-      callback(
-        dependencies.length === 1 ?
-        refs.current[0] :
-        refs.current
-      );
+      callback(refs.current as unknown as T);
 
       dependencies.forEach((dependency, i) => {
         refs.current[i] = dependency;
-      })
+      });
     },
     dependencies
   );
 
   return null;
-}
+};
 
 export default useEffectWithPrevious;
