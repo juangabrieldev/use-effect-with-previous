@@ -13,19 +13,11 @@ npm install --save use-effect-with-previous
 ## Usage
 
 ```js
-import React, { useState } from 'react'
 import useEffectWithPrevious from 'use-effect-with-previous'
 
 const Example = () => {
   const [ state, setState ] = useState(1);
   const [ anotherState, setAnotherState ] = useState(2);
-
-  useEffectWithPrevious(
-    previousState => {
-    // Omit array destructuring if there's only one dependency.
-    },
-    [state]
-  );
 
   useEffectWithPrevious(
     ([ previousState, previousAnotherState ]) => {
