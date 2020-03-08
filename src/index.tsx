@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 
-type Callback<T> = (previousValues: T | null[]) => void;
+type Callback<T> = (previousValues: T | null[]) => () => void;
 
 function useEffectWithPrevious<T extends readonly any[]>(callback: Callback<T>, dependencies: T) {
   const refs = useRef(Array(dependencies.length).fill(null))
