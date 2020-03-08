@@ -1,6 +1,6 @@
 {
   "name": "use-effect-with-previous",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "A layer over useEffect that provides previous values of dependencies.",
   "author": "juangabrieldev",
   "license": "MIT",
