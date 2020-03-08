@@ -7,11 +7,13 @@ function useEffectWithPrevious<T extends readonly any[]>(callback: Callback<T>, 
 
   useEffect(
     () => {
-      callback(refs.current as unknown as T);
+      const cleanup = callback(refs.current as unknown as T);
 
       dependencies.forEach((dependency, i) => {
         refs.current[i] = dependency;
       });
+
+      return cleanup;
     },
     dependencies
   );
