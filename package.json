@@ -44,5 +44,12 @@
     "rollup-plugin-typescript2": "^0.19.2",
     "rollup-plugin-url": "^2.1.0",
     "typescript": "^3.2.4"
-  }
+  },
+  "keywords": [
+    "react",
+    "use-effect",
+    "use effect",
+    "use-effect-with-previous",
+    "use effect with previous"
+  ]
 }
